@@ -5,6 +5,17 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
+class Dep{
+  constructor(){
+
+  }
+}
+function Test(){
+  var dep = new Dep()
+  console.log(Dep.prototype)
+}
+
+Test()
 
 /* eslint-disable no-new */
 new Vue({
