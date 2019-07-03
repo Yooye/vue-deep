@@ -24,6 +24,7 @@ class Yue{
         Object.keys(dataObj).forEach((key)=>{
             this.defineReactive(dataObj,key,dataObj[key]) 
             //对data的每一个key做响应式处理
+            this.proxyData(key)
         })
     }
 
@@ -52,7 +53,21 @@ class Yue{
             }
         })
     }
+
+    // 在vue根上定义属性代理data中的数据，使得vue实例可以通过data.msg 读取data值
+    proxyData(key) {
+      Object.defineProperty(this, key, {
+        get() {
+          return this.$data[key];
+        },
+        set(newVal) {
+          this.$data[key] = newVal;
+        }
+      });
+    }
 }
+
+
 
 // 定义一个Dep类，用以管理或收集所有的Watcher
 class Dep{
