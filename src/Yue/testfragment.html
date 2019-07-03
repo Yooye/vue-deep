@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app{
+            border: 1px solid red;
+            margin: 10px;
+            padding: 20px;
+        }
+        #new-app{
+            border: 1px solid blue;
+            margin: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="outer">
+            <div class="inner">
+                我是一个dom节点{{动态数据}}
+            </div>
+        </div>
+        <ul>
+            <li>一个ul节点</li>
+        </ul>
+        <span>一个span节点</span>
+    </div>
+
+    <div id="new-app"></div>
+</body>
+<script>
+    setTimeout(function(){
+        var fragment = document.createDocumentFragment();
+        var el = document.getElementById('app');
+        let child;
+        while((child = el.firstChild)){
+            fragment.appendChild(child)
+            alert(1)
+        }
+
+        var newEl = document.getElementById('new-app');
+        newEl.appendChild(fragment)
+    },2000)
+</script>
+</html>

@@ -6,11 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="app">
+        <h3>{{msg}}</h3>
+    </div>
 </body>
+<script src="./compile.js"></script>
 <script src="./Yue.js"></script>
 <script>
     var vm = new Yue({
+        el:'#app',
         data:{
             msg:'hello'
         }

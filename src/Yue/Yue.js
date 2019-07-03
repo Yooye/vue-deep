@@ -8,11 +8,12 @@ class Yue{
         this.$options = options //获取new Yue时传入的参数对象
         this.$data = options.data //获取参数对象中的data
         this.observe(this.$data) //将data对象进行响应化处理
-
-        new Watcher(this, 'msg')
-        setTimeout(()=>{
-            this.$data.msg = 'lalala'
-        },2000)
+        
+        new Compile(options.el, this)
+        // new Watcher(this, 'msg')
+        // setTimeout(()=>{
+        //     this.$data.msg = 'lalala'
+        // },2000)
     }
 
     observe(dataObj){
@@ -71,9 +72,10 @@ class Dep{
 }
 
 class Watcher{
-    constructor(ym,key){
+    constructor(ym,key,cb){
         this.$ym = ym
         this.$key = key
+        this.$cb = cb
         Dep.target = this 
         //在Dep的全局挂载一个target，用以记录具体的key所对应的Watcher信息
         this.$ym.$data[this.$key] 
@@ -82,6 +84,7 @@ class Watcher{
     }
 
     update(){
-        console.log(`${this.$key}属性更新了~`)
+        // console.log(`${this.$key}属性更新了~`)
+        this.$cb.call(this.$ym,this.$ym[this.$key])
     }
 }
